@@ -37,7 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
     double height= MediaQuery.of(context).size.height;
     double width= MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SliderMenuContainer(
+      body:
+      SliderMenuContainer(
         appBarColor: Colors.teal,
         key: _key,
         sliderMenuCloseSize: 0,
