@@ -1,5 +1,7 @@
 import 'package:first_full_app/model/question_model.dart';
 import 'package:first_full_app/screens/quiz.dart';
+import 'package:first_full_app/screens/score_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuizStart extends StatefulWidget {
@@ -9,38 +11,97 @@ class QuizStart extends StatefulWidget {
   _QuizStartState createState() => _QuizStartState();
 }
 
-QuestionModel questionModel1= QuestionModel
+QuestionModel qustionModel1= QuestionModel
   (
-    "What is the capital of Bangladesh?",
-    ["Sylhet","Dhaka","Barisal","Noyakhali"],
-    [0,1,0,0]
-);
-QuestionModel questionModel2= QuestionModel
-  (
-    "What is the national flower of Bangladesh?",
-    ["Water Lily","Rose","Goldmery","Cosmos"],
-    [1,0,0,0]
-);
-QuestionModel questionModel3= QuestionModel
-  (
-    "What is the national animal of Bangladesh?",
-    ["Cat","Pegion","Dog","Tiger"],
+    "বাংলাদেশের রাজধানি কোনটা?",
+    [ "বগুড়া","ফকিরহাট","বাগেরহাট","ঢাকা"],
     [0,0,0,1]
 );
 
+QuestionModel qustionModel2= QuestionModel
+  (
+    "পদ্মা সেতু কোন দু’টি জেলাকে সংযুক্ত করেছে?",
+    [ "বগুড়া ও মুন্সীগঞ্জ","মুন্সীগঞ্জ ও শরীয়তপুর","বাগেরহাট ও ঢাকা","ঢাকা ও সরিয়তপুর"],
+    [0,1,0,0]
+);
+
+QuestionModel qustionModel3= QuestionModel
+  (
+    "বাংলাদেশের সর্বাধিক চা বাগান কোন জেলায় অবস্থিতে?",
+    [ "মৌলভীবাজার","মুন্সীগঞ্জ","শরীয়তপুর","ঢাকা"],
+    [1,0,0,0]
+);
+
+QuestionModel qustionModel4= QuestionModel
+  (
+    "বাংলাদেশের পুলিশ মুক্তিযুদ্ধ জাদুঘর কোথায় অবস্থিত?",
+    [ "রাজারবাগ, ঢাকা","গাবতলী, ঢাকা"," মাহবাগ, ঢাকা","জাহঙ্গীর নগর, ঢাকা",],
+    [1,0,0,0]
+);
+
+QuestionModel qustionModel5= QuestionModel
+  (
+    "মুক্তিযুদ্ধের আত্মসমর্পণ দলিল কোথায় স্বাক্ষরিত হয়ে?",
+    [ "রজারবাগ ময়দানে","রেসকোর্স ময়দানে","জাহঙ্গীর নগর ময়দানে","ঢাকা ময়দান"],
+    [0,1,0,0]
+);
+
+QuestionModel qustionModel6= QuestionModel
+  (
+    "আয়তনে বাংলাদেশের সবচেয়ে বড় জেলা কোনটি?",
+    [ "সিলেট","মুন্সীগঞ্জ","পার্বত্য রাঙামাটি","বগুড়া"],
+    [0,0,1,0]
+);
+
+QuestionModel qustionModel7= QuestionModel
+  (
+    "বাংলাদেশের কোন জেলাটির নামকরণ করা হয়েছে একটি নদীর নাম অনুসারে",
+    [ "সিলেট","মুন্সীগঞ্জ","ফেনীি","গোপালগঞ্জ"],
+    [0,0,1,0]
+);
+
+QuestionModel qustionModel8= QuestionModel
+  (
+    "রাখাইন উপজাতিদের অধিক বাস কোন জেলায়",
+    [ "মুন্সীগঞ্জ জেলায়","নেত্রকোণা জেলায়",
+      "কক্সবাজার জেলায়","শেরপুর জেলায়"],
+    [0,0,1,0]
+);
+
+QuestionModel qustionModel9= QuestionModel
+  (
+    "আয়তনের দিক থেকে বিশ্বে বাংলাদেশের অবস্থান কত তম",
+    [ "৮০","৬০","৫০","৯০"],
+    [0,0,0,1]
+);
+QuestionModel qustionModel10= QuestionModel
+  (
+    "বাংলাদেশের প্রথম নিরক্ষরতামুক্ত গ্রাম কোনটি",
+    [ "মানিকগঞ্জ","গাজীপুর","কচুবাড়ির কৃষ্টপুর, ঠাকুরগাঁও","জামালপুর"],
+    [0,0,1,0]
+);
 List<QuestionModel> questionModelList=[
-  questionModel1,
-  questionModel2,
-  questionModel3
+  qustionModel1,
+  qustionModel2,
+  qustionModel3,
+  qustionModel4,
+  qustionModel5,
+  qustionModel6,
+  qustionModel7,
+  qustionModel8,
+  qustionModel9,
+  qustionModel10
 ];
 late bool ansVisibility;
 int questionNumber=0;
 int score=0;
+bool prevVisibility=false;
 late List<Color> optionColorList;
 class _QuizStartState extends State<QuizStart> {
 
   @override
   void initState() {
+
     ansVisibility= false;
     optionColorList= [
       Color(0xff000000),
@@ -48,6 +109,12 @@ class _QuizStartState extends State<QuizStart> {
       Color(0xff000000),
       Color(0xff000000)
     ];
+    if(questionNumber!=0)
+      {
+        setState(() {
+          prevVisibility=true;
+        });
+      }
     super.initState();
   }
 
@@ -100,14 +167,17 @@ class _QuizStartState extends State<QuizStart> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     height: 50,
-                    width: 200,
+                    width: 250,
                     decoration: BoxDecoration(
+                      color: optionColorList[i],
                       border: Border.all()
                     ),
                     child: Center(
                       child: Text(questionModelList[
                         questionNumber].optionList[i],
-                      style: TextStyle(fontSize: 20,color: optionColorList[i]),),
+                      style: TextStyle(fontSize: 20,
+                          color:Colors.white,
+                      fontWeight: FontWeight.bold),),
                     ),
                   ),
                 ),
@@ -131,22 +201,78 @@ class _QuizStartState extends State<QuizStart> {
             SizedBox(
               height: 30,
             ),
-            ElevatedButton(
-                onPressed: (){
-                  setState(() {
-                    if(questionNumber<2)
-                    questionNumber++;
-                    else
-                     {
-                       questionNumber=0;
-                       Navigator.push(context,
-                           MaterialPageRoute(
-                               builder: (context)=>Quiz()));
-                     }
-                  });
-                  initState();
-                },
-                child: Text("Next"))
+
+            Row(
+              children: [
+                Visibility(
+                  visible: prevVisibility,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.teal
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          if(questionNumber>0)
+                            {
+                              questionNumber--;
+                            }
+                          else
+                          {
+
+                          }
+                        });
+                        //initState();
+                      },
+                      child: Container(
+                        width: 90,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.arrow_back,size: 18,),
+                            SizedBox(width: 5,),
+                            Text("Previous",style: TextStyle(
+                                fontSize: 16
+                            ),),
+                          ],
+                        ),
+                      )),
+                ),
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal
+                  ),
+                    onPressed: (){
+                      setState(() {
+                        if(questionNumber<9)
+                        questionNumber++;
+                        else
+                         {
+                           questionNumber=0;
+                           Navigator.push(context,
+                               MaterialPageRoute(
+                                   builder: (context)=>ScoreView(
+                                     totalScore: score,
+                                   )));
+                         }
+                      });
+                      initState();
+                    },
+                    child: Container(
+                      width: 90,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Next",style: TextStyle(
+                            fontSize: 16
+                          ),),
+                          SizedBox(width: 5,),
+                          Icon(Icons.arrow_forward,size: 18,)
+                        ],
+                      ),
+                    )),
+              ],
+            )
           ],
         ),
       ),
