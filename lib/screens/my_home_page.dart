@@ -1,4 +1,5 @@
 import 'package:first_full_app/helper/menu_widget.dart';
+import 'package:first_full_app/model/flower_model.dart';
 import 'package:first_full_app/screens/about_us.dart';
 import 'package:first_full_app/screens/employees.dart';
 import 'package:first_full_app/screens/photo_gallery.dart';
@@ -30,6 +31,7 @@ final List<String> imgList = [
  "assets/image/ict8.jpg"
   ];
 
+Confidential cData=Confidential();
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
