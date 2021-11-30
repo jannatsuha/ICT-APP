@@ -1,5 +1,6 @@
 import 'package:first_full_app/provider/employee_provider.dart';
 import 'package:first_full_app/provider/quiz_provider.dart';
+import 'package:first_full_app/provider/student_provider.dart';
 import 'package:first_full_app/screens/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,13 +8,16 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     MultiProvider(
-        providers:[
-          ChangeNotifierProvider<QuizProvider>(create: (_) => QuizProvider()),
-          ChangeNotifierProvider<EmployeeProvider>(create: (_) => EmployeeProvider()),
+        providers: [
+          ChangeNotifierProvider<StudentProvider>
+            (create: (_)=> StudentProvider()),
+          ChangeNotifierProvider<EmployeeProvider>
+            (create: (_)=> EmployeeProvider()),
+          ChangeNotifierProvider<QuizProvider>
+            (create: (_)=> QuizProvider()),
         ],
       child: MyApp(),
-    ),
-
+    )
   );
 }
 

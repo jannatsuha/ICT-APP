@@ -1,15 +1,54 @@
+import 'package:first_full_app/provider/student_provider.dart';
 import 'package:flutter/material.dart';
-
-class AboutUs extends StatefulWidget {
+import 'package:provider/provider.dart';
+class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);
 
   @override
-  _AboutUsState createState() => _AboutUsState();
-}
-
-class _AboutUsState extends State<AboutUs> {
-  @override
   Widget build(BuildContext context) {
-    return Container();
+    Provider.of<StudentProvider>(context).initializeAllStudent();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Student Details"),
+        centerTitle: true,
+      ),
+      body: Consumer<StudentProvider>(
+          builder: (context,stdProvider,child){
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: stdProvider.studentModelList.length,
+                      itemBuilder: (context,index){
+                        return Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Name: "),
+                                  Text(stdProvider.
+                                  studentModelList[index].name),
+                                ],
+                              ),
+                              Text(stdProvider.
+                              studentModelList[index].id),
+                              Text(stdProvider.
+                              studentModelList[index].dept),
+                              Text(stdProvider.
+                              studentModelList[index].age),
+                            ],
+                          ),
+                        );
+                      }
+                  ),
+                ),
+              ],
+            );
+          }
+      ),
+    );
   }
 }
+
