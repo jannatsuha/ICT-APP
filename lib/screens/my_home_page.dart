@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         drawerIconSize: width*0.08,
         //slideDirection: Slider.RIGHT_TO_LEFT,
         //appBarPadding: const EdgeInsets.only(top: 10),
-        sliderMenuOpenSize: 600,
+        sliderMenuOpenSize: 280,
         appBarHeight: 100,
         appBarPadding: EdgeInsets.fromLTRB(0, 40, 0, 0),
         sliderMenu:
@@ -109,64 +109,77 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
         sliderMain:
-        Consumer<EmployeeProvider>(
-          builder: (context,empProvider,child){
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                    ),
-                    items: imgList
-                        .map((item) => Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        height: height/4.5,
-                        width: width/1.2,
-                        child: Image.asset(item,
-                          fit: BoxFit.cover,
+        Column(
+          children: [
+            Consumer<EmployeeProvider>(
+              builder: (context,empProvider,child){
+                return Column(
+                  children: [
+                    Container(
+                      height: height/3.8,
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlay: true,
                         ),
-                      ),
-                    ))
-                        .toList(),
-                  ),
-
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                    ),
-                    items: empProvider.employeeModelList
-                        .map((item) => Container(
-                          height: height/2,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 150,
-                                width: 150,
-                                child: Image.asset(item.image),
-                              ),
-                              // Text(item.name,style: TextStyle
-                              //   (fontSize: 18,
-                              //     color: Colors.white),),
-                              // Text(item.degi,maxLines:2,style:
-                              // TextStyle(fontSize: 14,
-                              //     color: Colors.white),),
-                              Container(
-                                height: 100,
-                                child: Text(item.comment,maxLines:6,style:
-                                TextStyle(fontSize: 14,
-                                    color: Colors.white),),
-                              ),
-                            ],
+                        items: imgList
+                            .map((item) => Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            width: width/1.2,
+                            child: Image.asset(item,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ))
-                        .toList(),
-                  ),
-                ],
-              ),
-            );
-          }
+                            .toList(),
+                      ),
+                    ),
+                    Container(
+                      height: height/2,
+                      width: 400,
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                        ),
+                        items: empProvider.employeeModelList
+                            .map((item) => Container(
+                          height: 500,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 150,
+                                    width: 150,
+                                    child: Image.asset(item.image),
+                                  ),
+                                  Text(item.name,style: TextStyle
+                                    (fontSize: 18,
+                                      color: Colors.white),),
+                                  Text(item.degi,maxLines:2,style:
+                                  TextStyle(fontSize: 14,
+                                      color: Colors.white),),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: 110,
+                                      child: Text(item.comment,
+                                        textAlign: TextAlign.justify,
+                                        maxLines:8,style:
+                                      TextStyle(fontSize: 10,
+                                          color: Colors.white),),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ))
+                            .toList(),
+                      ),
+                    ),
+
+                  ],
+                );
+              }
+            ),
+          ],
         )
       ),
     );
