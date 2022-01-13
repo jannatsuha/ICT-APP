@@ -9,6 +9,7 @@ class AboutUs extends StatelessWidget {
     Provider.of<StudentProvider>(context).initializeAllStudent();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text("Student Details"),
         centerTitle: true,
       ),
@@ -34,10 +35,6 @@ class AboutUs extends StatelessWidget {
                               ),
                               Text(stdProvider.
                               studentModelList[index].id),
-                              Text(stdProvider.
-                              studentModelList[index].dept),
-                              Text(stdProvider.
-                              studentModelList[index].age),
                             ],
                           ),
                         );

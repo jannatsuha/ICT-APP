@@ -46,6 +46,10 @@ class QuizProvider with ChangeNotifier {
 
   }
 
+  initScore(){
+    score=0;
+    notifyListeners();
+  }
   nextButtonPress(context){
     if(questionNumber<9)
       questionNumber++;

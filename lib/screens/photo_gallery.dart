@@ -31,19 +31,22 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         child: GridView.count(
           crossAxisCount: 3,
           childAspectRatio: 1,
-          children: imageList.map((item){
+          children: imageList.asMap().keys.
+          toList().map((index){
             return Padding(
               padding: const EdgeInsets.all(5.0),
               child: InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute
-                    (builder: (context)=>FullImageShow(imageLink: item)));
+                    (builder: (context)=>
+                      FullImageShow(imageLink:imageList,
+                      index: index,)));
                 },
                 child: AnimatedContainer(
                   height: 90,
                     width: 90,
                     duration: Duration(milliseconds: 1000),
-                    child: Image.asset(item,
+                    child: Image.asset(imageList[index],
                       fit: BoxFit.cover,)
                 ),
               ),

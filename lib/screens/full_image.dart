@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 class FullImageShow extends StatefulWidget {
-  String imageLink;
+  List<String> imageLink;
+  int index;
    FullImageShow({Key? key,
-     required this.imageLink}) : super(key: key);
+     required this.imageLink,
+     required this.index,
+   }) : super(key: key);
 
   @override
   _FullImageShowState createState() => _FullImageShowState();
@@ -11,11 +14,48 @@ class FullImageShow extends StatefulWidget {
 class _FullImageShowState extends State<FullImageShow> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Image.asset(widget.imageLink)
-      ,
-    );
+    return
+      Scaffold(
+        body:  Container(
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                  widget.imageLink[widget.index]
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                        onTap: (){
+                          setState(() {
+                            if(widget.index>0)
+                              widget.index--;
+                          });
+                        },
+                        child: Icon(Icons.arrow_back_ios,
+                        size: 30,color: Colors.white,)
+                    ),
+                    Spacer(),
+                    InkWell(
+                        onTap: (){
+                          setState(() {
+                            if(widget.imageLink.length-1>widget.index)
+                              widget.index++;
+                          });
+                        },
+                        child: Icon(Icons.arrow_forward_ios,
+                        size: 30,color: Colors.white,)
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      );
   }
 }

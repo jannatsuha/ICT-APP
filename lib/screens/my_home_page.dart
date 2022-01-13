@@ -125,6 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             .map((item) => Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Container(
+
                             width: width/1.2,
                             child: Image.asset(item,
                               fit: BoxFit.cover,
@@ -134,37 +135,52 @@ class _MyHomePageState extends State<MyHomePage> {
                             .toList(),
                       ),
                     ),
-                    Container(
-                      height: height/2,
-                      width: 400,
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
                       child: CarouselSlider(
                         options: CarouselOptions(
+                          aspectRatio: 16/13,
+                          viewportFraction: 1.0,
                           autoPlay: true,
                         ),
                         items: empProvider.employeeModelList
                             .map((item) => Container(
-                          height: 500,
+                         // height: 600,
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 150,
-                                    width: 150,
-                                    child: Image.asset(item.image),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1.5,
+                                            color: Colors.black
+                                        )
+                                    ),
+                                     height: 130,
+                                     width: 110,
+                                    child: Image.asset(item.image,
+                                    fit: BoxFit.cover,),
                                   ),
                                   Text(item.name,style: TextStyle
                                     (fontSize: 18,
-                                      color: Colors.white),),
+                                      color: Colors.white,fontWeight:
+                                  FontWeight.bold),),
                                   Text(item.degi,maxLines:2,style:
                                   TextStyle(fontSize: 14,
-                                      color: Colors.white),),
+                                      color: Colors.white,fontWeight:
+                                      FontWeight.bold),),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(top: 8.0,bottom: 8,
+                                    left: 20,right: 20),
                                     child: Container(
-                                      height: 110,
+                                      //height: 110,
                                       child: Text(item.comment,
                                         textAlign: TextAlign.justify,
                                         maxLines:8,style:
-                                      TextStyle(fontSize: 10,
+                                      TextStyle(fontSize: 13,
                                           color: Colors.white),),
                                     ),
                                   ),
@@ -172,6 +188,34 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ))
                             .toList(),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      onTap:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder:
+                        (context) => Quiz()));
+                     },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              width: 3,
+                              color: Colors.black
+                          ),
+                          color: Colors.blue.shade100,
+                        ),
+                        height: 90,
+                        width: 140,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/gif/quiz.gif"),
+                        ),
                       ),
                     ),
 

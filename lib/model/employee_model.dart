@@ -11,5 +11,6 @@ class EmployeeModel{
       this.name, this.degi,
       this.image, this.number,
       this.email, this.office,
-      this.comment);
+      this.comment
+      );
 }

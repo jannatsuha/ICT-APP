@@ -11,16 +11,61 @@ class Employees extends StatefulWidget {
   @override
   _EmployeesState createState() => _EmployeesState();
 }
-
+Widget appbarTitle= Text("Employee Details");
+Icon actionIcon=Icon(Icons.search);
+TextEditingController controller = new TextEditingController();
+String filter="";
 class _EmployeesState extends State<Employees> {
+@override
+  void initState() {
+  controller.addListener(
+          () {
+        if(controller.text.isEmpty) {
+          filter = "";
+        } else {
+
+          filter = controller.text;
+        }
+      }
+  );
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Provider.of<EmployeeProvider>(context,listen: false).initializeAllEmployee();
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: CustomAppBar(titile:
-          'All Employee List',)
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: appbarTitle,
+        actions: [
+                  IconButton(
+                    onPressed:(){
+                      setState(() {
+                        if(actionIcon.icon==Icons.search){
+                          appbarTitle=TextField(
+                            onChanged: (val){
+                              Provider.of<EmployeeProvider>
+                                (context,listen: false).changeSearchString(val);
+                            },
+                            decoration: InputDecoration(
+                              // prefixIcon: new Icon(Icons.search, color: Colors.white),
+                              hintText: "Search...",
+                              hintStyle: new TextStyle(color: Colors.white),
+                            ),
+                          );
+                          actionIcon=Icon(Icons.clear);
+                        }else{
+                          appbarTitle=Text("Employee Details");
+                          actionIcon=Icon(Icons.search);
+                          controller.clear();
+                        }
+                        controller= controller;
+                      });
+                    },
+                    icon: actionIcon)
+        ],
       ),
       body:Consumer<EmployeeProvider>(
         builder: (context,employeeProvider,child){
@@ -28,7 +73,7 @@ class _EmployeesState extends State<Employees> {
             children: [
               Expanded(
                 child: ListView.builder(
-                    itemCount: employeeProvider.employeeModelList.length,
+                    itemCount: employeeProvider.emps.length,
                     itemBuilder: (context,index){
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -49,7 +94,7 @@ class _EmployeesState extends State<Employees> {
                                       borderRadius: BorderRadius.circular(180),
                                       image: DecorationImage(
                                           image: AssetImage(
-                                              employeeProvider.employeeModelList[index].image
+                                              employeeProvider.emps[index].image
                                           )
                                       )
                                   ),
@@ -64,7 +109,7 @@ class _EmployeesState extends State<Employees> {
                                       style: TextStyle(
                                           fontSize: 20
                                       ),),
-                                    Text(employeeProvider.employeeModelList[index].name,
+                                    Text(employeeProvider.emps[index].name,
                                       style: TextStyle(
                                           fontSize: 20
                                       ),),
@@ -75,11 +120,11 @@ class _EmployeesState extends State<Employees> {
                                   children: [
                                     Text("পদবি: ",
                                       style: TextStyle(
-                                          fontSize: 18
+                                          fontSize: 15
                                       ),),
-                                    Text(employeeProvider.employeeModelList[index].degi,
+                                    Text(employeeProvider.emps[index].degi,
                                       style: TextStyle(
-                                          fontSize: 18
+                                          fontSize: 15
                                       ),),
                                   ],
                                 ),
@@ -90,7 +135,7 @@ class _EmployeesState extends State<Employees> {
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
-                                    Text(employeeProvider.employeeModelList[index].office,
+                                    Text(employeeProvider.emps[index].office,
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
@@ -103,7 +148,7 @@ class _EmployeesState extends State<Employees> {
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
-                                    Text(employeeProvider.employeeModelList[index].email,
+                                    Text(employeeProvider.emps[index].email,
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
@@ -116,7 +161,7 @@ class _EmployeesState extends State<Employees> {
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
-                                    Text(employeeProvider.employeeModelList[index].number,
+                                    Text(employeeProvider.emps[index].number,
                                       style: TextStyle(
                                           fontSize: 18
                                       ),),
@@ -137,3 +182,4 @@ class _EmployeesState extends State<Employees> {
     );
   }
 }
+
