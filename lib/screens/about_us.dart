@@ -1,4 +1,5 @@
 import 'package:first_full_app/provider/student_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class AboutUs extends StatelessWidget {
@@ -13,38 +14,64 @@ class AboutUs extends StatelessWidget {
         title: Text("Student Details"),
         centerTitle: true,
       ),
-      body: Consumer<StudentProvider>(
-          builder: (context,stdProvider,child){
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: stdProvider.studentModelList.length,
-                      itemBuilder: (context,index){
-                        return Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Name: "),
-                                  Text(stdProvider.
-                                  studentModelList[index].name),
-                                ],
-                              ),
-                              Text(stdProvider.
-                              studentModelList[index].id),
-                            ],
-                          ),
-                        );
-                      }
-                  ),
-                ),
-              ],
-            );
-          }
-      ),
+      // body: Consumer<StudentProvider>(
+      //     builder: (context,stdProvider,child){
+      //       return Column(
+      //         children: [
+      //           Expanded(
+      //             child: ListView.builder(
+      //               itemCount: stdProvider.studentModelList.length,
+      //                 itemBuilder: (context,index){
+      //                   return Padding(
+      //                     padding: const EdgeInsets.all(18.0),
+      //                     child: Card(
+      //                       child: Column(
+      //                         children: [
+      //                           Padding(
+      //                             padding: const EdgeInsets.all(5.0),
+      //                             child: Row(
+      //                               mainAxisAlignment: MainAxisAlignment.center,
+      //                               children: [
+      //                                 Text("Name: ",
+      //                                 style: TextStyle(
+      //                                   color: Colors.teal,
+      //                                   fontWeight: FontWeight.bold
+      //                                 ),),
+      //                                 Text(stdProvider.
+      //                                 studentModelList[index]
+      //                                     .name,style: TextStyle(
+      //
+      //                                     fontWeight: FontWeight.bold
+      //                                 ),),
+      //                               ],
+      //                             ),
+      //                           ),
+      //                           Padding(
+      //                             padding: const EdgeInsets.all(5.0),
+      //                             child: Row(
+      //                               mainAxisAlignment: MainAxisAlignment.center,
+      //                               children: [
+      //                                 Text("Id: ",
+      //                                   style: TextStyle(
+      //                                       color: Colors.teal,
+      //                                       fontWeight: FontWeight.bold
+      //                                   ),),
+      //                                 Text(stdProvider.
+      //                                 studentModelList[index].id),
+      //                               ],
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                   );
+      //                 }
+      //             ),
+      //           ),
+      //         ],
+      //       );
+      //     }
+      // ),
     );
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 class FullImageShow extends StatefulWidget {
   List<String> imageLink;
   int index;
-   FullImageShow({Key? key,
+   FullImageShow({
+     Key? key,
      required this.imageLink,
      required this.index,
    }) : super(key: key);

@@ -38,7 +38,8 @@ Confidential cData=Confidential();
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<EmployeeProvider>(context,listen: false).initializeAllEmployee();
+    Provider.of<EmployeeProvider>
+      (context,listen: false).initializeSpecialEmployee();
     double height= MediaQuery.of(context).size.height;
     double width= MediaQuery.of(context).size.width;
     return Scaffold(
@@ -147,8 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           viewportFraction: 1.0,
                           autoPlay: true,
                         ),
-                        items: empProvider.employeeModelList
-                            .map((item) => Container(
+                        items:
+                        empProvider.employeeSpecialList
+                        .map((index) =>
+                            Container(
                          // height: 600,
                               child: Column(
                                 children: [
@@ -161,14 +164,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                      height: 130,
                                      width: 110,
-                                    child: Image.asset(item.image,
+                                    child: Image.asset(index.image,
                                     fit: BoxFit.cover,),
                                   ),
-                                  Text(item.name,style: TextStyle
+                                  Text(
+                                  index.name,style: TextStyle
                                     (fontSize: 18,
                                       color: Colors.white,fontWeight:
                                   FontWeight.bold),),
-                                  Text(item.degi,maxLines:2,style:
+                                  Text(index.degi,maxLines:2,style:
                                   TextStyle(fontSize: 14,
                                       color: Colors.white,fontWeight:
                                       FontWeight.bold),),
@@ -177,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     left: 20,right: 20),
                                     child: Container(
                                       //height: 110,
-                                      child: Text(item.comment,
+                                      child: Text(index.comment,
                                         textAlign: TextAlign.justify,
                                         maxLines:8,style:
                                       TextStyle(fontSize: 13,
@@ -186,7 +190,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ],
                               ),
-                            ))
+                            )
+                        )
                             .toList(),
                       ),
                     ),

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.first_full_app">
    <application
-        android:label="ICT MINISTRY"
-        android:icon="@mipmap/ic_launcher">
+        android:label="ICT APP"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -9,7 +9,10 @@ List<String> imageList=[
   "assets/image/ict4.jpg",
   "assets/image/ict5.jpg",
   "assets/image/ict6.jpg",
-  "assets/image/ict7.jpg"
+  "assets/image/a3.jpg",
+  "assets/image/aa.jpg",
+  "assets/image/ddd.jpeg",
+  "assets/image/gg.jpg"
 ];
 class PhotoGallery extends StatefulWidget {
   const PhotoGallery({Key? key}) : super(key: key);

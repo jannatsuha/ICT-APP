@@ -9,10 +9,21 @@ class EmployeeProvider with ChangeNotifier{
   List<EmployeeModel> _employeeModelList=[];
   List<EmployeeModel> get employeeModelList => _employeeModelList;
 
+  List<EmployeeModel> _employeeSpecialList=[];
+  List<EmployeeModel> get employeeSpecialList => _employeeSpecialList;
+
   initializeAllEmployee(){
     if(_employeeModelList.length==0){
       _employeeModelList.clear();
       _employeeModelList= employeeRepo.getAllEmployeeList;
+      notifyListeners();
+    }
+  }
+
+  initializeSpecialEmployee(){
+    if(_employeeSpecialList.length==0){
+      _employeeSpecialList.clear();
+      _employeeSpecialList= employeeRepo.getSpecialList;
       notifyListeners();
     }
   }
